@@ -39,7 +39,9 @@ It helps you to get started with the REST APIs development with Python Django.
     ```
     And here it is! Your REST APIs are now accessible through the localhost.
 
-### Steps to create Django app using the REST Framework from scratch
+-----
+
+### Steps to create a new Django app using the REST Framework from scratch
 
 > Note: In this tutorial we're gonna use Python version >= 3.7
 
