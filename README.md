@@ -116,8 +116,7 @@ It helps you to get started with the REST APIs development with Python Django.
             'apps.local_app_name'
         ]
         ```
-6. Specify the database if needed
-    In this example we're using SQLite database.
+6. Specify the database (if needed). In this example we're using SQLite database.
     ```py
     DATABASES = {
         'default': {
