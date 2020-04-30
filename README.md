@@ -15,9 +15,11 @@ It helps you to get started with the REST APIs development with Python Django.
 3. Before running the app run migrate command for propagating changes you've made to your models (adding a field, deleting a model, etc.) into your database schema.
     ```bash
     # Linux/macOS
+    python3.7 manage.py makemigrations
     python3.7 manage.py migrate
 
     # Windows
+    py -3.7 manage.py makemigrations
     py -3.7 manage.py migrate
     ```
 4. You can also check endpoint urls by using following commands
@@ -195,9 +197,11 @@ It helps you to get started with the REST APIs development with Python Django.
 10. Before running the app run migrate command for propagating changes you've made to your models (adding a field, deleting a model, etc.) into your database schema.
     ```bash
     # Linux/macOS
+    python3.7 manage.py makemigrations
     python3.7 manage.py migrate
 
     # Windows
+    py -3.7 manage.py makemigrations
     py -3.7 manage.py migrate
     ```
 11. Run the web server
@@ -208,3 +212,9 @@ It helps you to get started with the REST APIs development with Python Django.
     # Window11s
     py -3.7 manage.py runserver
     ```
+
+## References
+[1]. [https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/development_environment](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/development_environment)
+[2]. [https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/skeleton_website](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/skeleton_website)
+[3]. [https://www.django-rest-framework.org/](https://www.django-rest-framework.org/)
+[4]. [https://docs.djangoproject.com/en/3.0/intro/overview/](https://docs.djangoproject.com/en/3.0/intro/overview/)
