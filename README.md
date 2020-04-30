@@ -2,7 +2,7 @@
 
 It helps you to get started with the REST APIs development with Python Django.
 
-### For running the boilerplate app
+### Run boilerplate locally
 1. Clone or download the repository.
 2. Install required packages
     ```bash
