@@ -153,8 +153,9 @@ It helps you to get started with the REST APIs development with Python Django.
     from rest_framework.request import Request
     from rest_framework.response import Response
     from rest_framework import viewsets
-    from apps.app_name.models import Demo
+    from apps.restapis.models.demo import Demo
     from rest_framework.decorators import action
+    from django.utils import timezone
 
 
     class DemoAPI(viewsets.GenericViewSet):
@@ -169,14 +170,12 @@ It helps you to get started with the REST APIs development with Python Django.
             :return: status message.
             """
             try:
-                data = request
-                rec = Demo(message=data['message'])
+                rec = Demo(message='message_with_current_timestamp_{0}'.format(timezone.now))
                 rec.save()
 
                 return Response({ 'status': 'Record had been created successfully!' })
             except:
                 return Response({ 'status': 'Failed to create a record!' })    
-
     ```
 9. Update an `urls.py` file
     You can find this file here `root/django_app/project_dir/urls.py` and after updating the file it may looks like:
