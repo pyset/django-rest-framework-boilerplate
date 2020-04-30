@@ -159,7 +159,7 @@ It helps you to get started with the REST APIs development with Python Django.
 
 
     class DemoAPI(viewsets.GenericViewSet):
-        @action(methods=["post"], detail=False)
+        @action(methods=["post"], detail=False, url_path=r"create")
         def post(self, request: Request, *args, **kwargs):
             """
             Create new record.
@@ -187,7 +187,7 @@ It helps you to get started with the REST APIs development with Python Django.
     from apps.restapis.demo_api import DemoAPI
 
     ROUTER = routers.DefaultRouter()
-    ROUTER.register(r"api/demo", DemoAPI , r"api/demo")
+    ROUTER.register(r"api", DemoAPI , r"api")
 
     urlpatterns = [
         url(r"^", include(ROUTER.urls)),
