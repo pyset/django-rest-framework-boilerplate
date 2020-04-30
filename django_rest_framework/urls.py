@@ -23,7 +23,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from apps.restapis.api.demo import DemoAPI
 
 ROUTER = routers.DefaultRouter()
-ROUTER.register(r"api/demo", DemoAPI , r"api/demo")
+ROUTER.register(r"api", DemoAPI , r"api")
 
 urlpatterns = [
     url(r"^", include(ROUTER.urls)),

@@ -40,7 +40,7 @@ class DemoAPI(viewsets.GenericViewSet):
         return Response(items)
 
 
-    @action(methods=["post"], detail=False)
+    @action(methods=["post"], detail=False, url_path=r"create")
     def post(self, request: Request, *args, **kwargs):
         """
         Create new record.
@@ -60,7 +60,7 @@ class DemoAPI(viewsets.GenericViewSet):
             return Response({ 'status': 'Failed to create a record!' })    
     
 
-    @action(methods=["get"], detail=False)
+    @action(methods=["get"], detail=False, url_path=r"fetch")
     def get(self, request: Request, *args, **kwargs):
         """
         Fetch all records.
