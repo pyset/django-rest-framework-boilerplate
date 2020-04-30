@@ -2,7 +2,7 @@
 
 It helps you to get started with the REST APIs development with Python Django.
 
-### Run boilerplate locally
+## Run boilerplate locally
 1. Clone or download the repository.
 2. Install required packages
     ```bash
@@ -41,7 +41,7 @@ It helps you to get started with the REST APIs development with Python Django.
 
 -----
 
-### Steps to create a new Django app using the REST Framework from scratch
+## Steps to create a new Django app using the REST Framework from scratch
 
 > Note: In this tutorial we're gonna use Python version >= 3.7
 
