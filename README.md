@@ -214,7 +214,7 @@ It helps you to get started with the REST APIs development with Python Django.
     ```
 
 ## References
-[1]. [https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/development_environment](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/development_environment)
-[2]. [https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/skeleton_website](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/skeleton_website)
-[3]. [https://www.django-rest-framework.org/](https://www.django-rest-framework.org/)
-[4]. [https://docs.djangoproject.com/en/3.0/intro/overview/](https://docs.djangoproject.com/en/3.0/intro/overview/)
+1. [https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/development_environment](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/development_environment)
+2. [https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/skeleton_website](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/skeleton_website)
+3. [https://www.django-rest-framework.org/](https://www.django-rest-framework.org/)
+4. [https://docs.djangoproject.com/en/3.0/intro/overview/](https://docs.djangoproject.com/en/3.0/intro/overview/)
