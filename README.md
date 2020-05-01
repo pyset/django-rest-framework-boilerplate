@@ -238,7 +238,7 @@ It helps you to get started with the REST APIs development with Python Django.
     # Window11s
     py -3.7 manage.py runserver
     ```
-    Now, you can fetch your APIs by using `http://localhost:PORT/api/`.
+    Now, you can access your APIs by using `http://localhost:PORT/api/`.
 
 ## References
 1. [https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/development_environment](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/development_environment)
