@@ -95,10 +95,10 @@ It helps you to get started with the REST APIs development with Python Django.
     * For creating applications
         ```bash
         # Linux/macOS
-        python3.7 -m ../manage.py startapp app_name
+        python3.7 ../manage.py startapp app_name
 
         # Windows
-        py -3.7 -m ../manage.py startapp app_name
+        py -3.7 ../manage.py startapp app_name
         ```
         * A **migrations** folder, used to store "migrations" — files that allow you to automatically update your database as you modify your models.
 5. Register the **rest_framework** application
