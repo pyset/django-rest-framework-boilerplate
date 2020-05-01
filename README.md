@@ -3,7 +3,7 @@
 It helps you to get started with the REST APIs development with Python Django.
 
 ## Run boilerplate locally
-1. Clone or download the repository.
+1. Clone or download the repository
 2. Install required packages
     ```bash
     # Linux/macOS
@@ -12,7 +12,7 @@ It helps you to get started with the REST APIs development with Python Django.
     # Windows
     py -3.7 -m pip install -r requirements.txt
     ```
-3. Before running the app run migrate command for propagating changes you've made to your models (adding a field, deleting a model, etc.) into your database schema.
+3. Before running the app run migrate command for propagating changes you've made to your models (adding a field, deleting a model, etc.) into your database schema
     ```bash
     # Linux/macOS
     python3.7 manage.py makemigrations
@@ -22,7 +22,7 @@ It helps you to get started with the REST APIs development with Python Django.
     py -3.7 manage.py makemigrations
     py -3.7 manage.py migrate
     ```
-4. You can also check endpoint urls by using following commands
+4. You can also check endpoint urls by using following commands:
     ```bash
     # Linux/macOS
     python3.7 manage.py show_urls
@@ -39,22 +39,22 @@ It helps you to get started with the REST APIs development with Python Django.
     # Windows
     py -3.7 manage.py runserver
     ```
-    And here it is! Your REST APIs are now accessible through the localhost.
+    And here it is! Your REST APIs are now accessible through the `http://localhost:PORT/api/`.
 
 
 ## Steps to create a new Django app using the REST Framework from scratch
 
 > Note: In this tutorial we're gonna use Python version >= 3.7
 
-1. Install **django** and **django-rest-framework** packages
+1. Install **django** and **djangorestframework** package
     ```bash
     # Linux/macOS
     python3.7 -m pip install django
-    python3.7 -m pip install django-rest-framework
+    python3.7 -m pip install djangorestframework
 
     # Windows
     py -3.7 -m pip install django
-    py -3.7 -m pip install django-rest-framework
+    py -3.7 -m pip install djangorestframework
     ```
 
     To check package installed version
@@ -118,7 +118,7 @@ It helps you to get started with the REST APIs development with Python Django.
             'apps.local_app_name'
         ]
         ```
-6. Specify the database (if needed). In this example we're using SQLite database.
+6. Specify the database (if needed). In this example we're using SQLite database
     ```py
     DATABASES = {
         'default': {
@@ -133,67 +133,94 @@ It helps you to get started with the REST APIs development with Python Django.
     """Demo Model"""
     from django.db import models
     from django.utils import timezone
-
-
+    
+    
     class Demo(models.Model):
-        """Demo Model."""
-
+    
         message = models.TextField(max_length=50, default=0)
         created = models.DateTimeField(null=False, default=timezone.now)
-
+    
         class Meta:
-            """Meta Class."""
-
+    
             db_table = 'demo'
+
     ```
 8. Create files for APIs in the `apps/app_name/` directory
     Example: `apps/app_name/demo_api.py`
     ```py
     """Demo API"""
+    import json
+    from django.core import serializers
+    from django.http import HttpResponseNotFound
     from rest_framework.request import Request
     from rest_framework.response import Response
-    from rest_framework import viewsets
+    from rest_framework.views import APIView
     from apps.restapis.models.demo import Demo
-    from rest_framework.decorators import action
-    from django.utils import timezone
-
-
-    class DemoAPI(viewsets.GenericViewSet):
-        @action(methods=["post"], detail=False, url_path=r"create")
+    
+    
+    def _model_to_json(rec):
+        data = serializers.serialize('json', rec)
+        struct = json.loads(data)
+        items = []
+        index = 0
+        for item in rec:
+            struct[index]['fields']['id'] = struct[index]['pk']
+            items.append(struct[index]['fields'])
+            index += 1
+    
+        return Response(items)
+    
+    
+    def _req_to_json(request: Request):
+        return json.loads(request.body.decode('utf-8'))
+    
+    
+    class DemoAPI(APIView):
+    
         def post(self, request: Request, *args, **kwargs):
-            """
-            Create new record.
-
-            :param request:  The request object.
-            :param args:
-            :param kwargs: Url params,
-            :return: status message.
-            """
             try:
-                rec = Demo(message='message_with_current_timestamp_{0}'.format(timezone.now))
+                data = _req_to_json(request)
+                rec = Demo(message=data['message'])
                 rec.save()
-
+    
                 return Response({ 'status': 'Record had been created successfully!' })
             except:
                 return Response({ 'status': 'Failed to create a record!' })    
+    
+        def get(self, request: Request, *args, **kwargs):
+            try:
+                records = Demo.objects.all()
+    
+                if records is None or len(records) == 0:
+                    return HttpResponseNotFound('Records not found!')
+    
+                return _model_to_json(records)
+            except:
+                return HttpResponseNotFound('Failed to fetch records!')
+    
+        def delete(self, request: Request, *args, **kwargs):
+            return Response('DELETE api called!')
+    
+        def put(self, request: Request, *args, **kwargs):
+            return Response('PUT api called!')
+
     ```
 9. Update an `urls.py` file
     You can find this file here `root/django_app/project_dir/urls.py` and after updating the file it may looks like:
     ```py
-    from rest_framework import routers
-    from django.conf.urls import include
     from django.conf.urls import url
-
-    from apps.restapis.demo_api import DemoAPI
-
-    ROUTER = routers.DefaultRouter()
-    ROUTER.register(r"api", DemoAPI , r"api")
-
+    from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+    
+    from apps.restapis.api.demo import DemoAPI
+    
     urlpatterns = [
-        url(r"^", include(ROUTER.urls)),
+        url(r"^api/", DemoAPI.as_view()),
     ]
+    
+    urlpatterns += staticfiles_urlpatterns()
+   
     ```
-10. Before running the app run migrate command for propagating changes you've made to your models (adding a field, deleting a model, etc.) into your database schema.
+10. Before running the app run migrate command for propagating changes you've made to your models (adding a field, deleting a model, etc.) into your database schema
     ```bash
     # Linux/macOS
     python3.7 manage.py makemigrations
@@ -211,6 +238,7 @@ It helps you to get started with the REST APIs development with Python Django.
     # Window11s
     py -3.7 manage.py runserver
     ```
+    Now, you can fetch your APIs by using `http://localhost:PORT/api/`.
 
 ## References
 1. [https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/development_environment](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/development_environment)
